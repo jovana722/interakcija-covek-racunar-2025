@@ -1,0 +1,138 @@
+version: "3.1"
+
+nlu:
+
+# 👋 POZDRAV
+- intent: greet
+  examples: |
+    - hi
+    - hello
+    - hey
+
+
+# 🧸 LISTANJE IGRAČAKA (target_group entity)
+- intent: list_toys
+  examples: |
+
+
+    - show toys for [girls](target_group)
+    - show toys for [boys](target_group)
+    - show toys for [kids](target_group)
+    - toys for [girls](target_group)
+    - toys for [boys](target_group)
+
+# 🔍 DETALJI IGRAČKE (po imenu)
+- intent: ask_toy_details
+  examples: |
+    - tell me more about [Plišana panda](toy_name)
+    - tell me more about [Superheroj figura](toy_name)
+    - tell me more about [Mala slikovnica boje](toy_name)
+    - tell me more about [Set za crtanje](toy_name)
+    - tell me more about [Vatrogasni kamion](toy_name)
+    - tell me more about [Monopol Junior](toy_name)
+    - tell me more about [LEGO Classic set](toy_name)
+    - tell me more about [Muzički bubanj](toy_name)
+    - tell me more about [Pametni globus](toy_name)
+    - tell me more about [Drvena abeceda](toy_name)
+    - tell me more about [Slikovnica životinje](toy_name)
+    - tell me more about [Figura dinosaurusa](toy_name)
+    - tell me more about [Kreativni set za modelovanje](toy_name)
+    - tell me more about [Traktor sa prikolicom](toy_name)
+    - tell me more about [Plišana jednorog](toy_name)
+    - tell me more about [Igra “Čoveče ne ljuti se”](toy_name)
+    - tell me more about [LEGO City policijska stanica](toy_name)
+    - tell me more about [Dečiji klavir](toy_name)
+    - tell me more about [Edukativni mikroskop](toy_name)
+    - tell me more about [Slagalica vozila](toy_name)
+    - tell me more about [Slikovnica brojevi](toy_name)
+    - tell me more about [Figura princeze](toy_name)
+    - tell me more about [Set za bojenje](toy_name)
+    - tell me more about [Sportski automobil](toy_name)
+    - tell me more about [Plišana mačka](toy_name)
+    - tell me more about [Sportski automobil](toy_name)
+    - tell me more about [Igra memorije](toy_name)
+    - tell me more about [Konstruktorski set “Grad”](toy_name)
+    - tell me more about [Muzički tamburina](toy_name)
+    - tell me more about [Edukativni tablet za decu](toy_name)
+
+
+    - pokaži detalje
+    - više informacija
+
+- intent: list_categories
+  examples: |
+    - show me categories
+    - list categories
+    - what categories do you have
+    - what toy categories are available
+    - show toy categories
+    - toy categories
+    - categories
+    - prikaži kategorije
+    - koje kategorije postoje
+    - koje vrste igračaka imate
+    - vrste igračaka
+
+- intent: list_toys_by_category
+  examples: |
+    - show toys from [Društvena igra](category_name) 
+    - show toys from [Slagalica](category_name)
+    - show toys from [Slikovnica](category_name)
+    - show toys from [Figura](category_name)
+    - show toys from [Kreativni set](category_name)
+    - show toys from [Vozilo](category_name)
+    - show toys from [Plišana igračka](category_name)
+    - show toys from [Konstruktorski set](category_name)
+    - show toys from [Muzička igračka](category_name)
+    - show toys from [Edukativna igračka](category_name)
+    - toys in [Kreativni set](category_name) category
+    - show me [Vozilo](category_name) toys
+    - igračke iz [Plišana igračka](category_name) kategorije
+
+
+# 🛒 DODAVANJE U KORPU
+- intent: add_to_cart
+  examples: |
+
+    - add to cart [Plišana panda](toy_name)
+    - buy this toy
+    - add this to cart
+
+
+- intent: reserve_entire_order
+  examples: |
+    - reserve entire order
+    - reserve whole cart
+    - reserve everything
+    - book my order
+    - reserve all toys
+    - reserve my cart
+
+
+# 👋 KRAJ
+- intent: goodbye
+  examples: |
+    - doviđenja
+    - vidimo se
+    - bye
+    - goodbye
+
+- synonym: boys
+  examples: |
+    - boy
+    - male
+
+- synonym: girls
+  examples: |
+    - girl
+    - female
+
+- synonym: all
+  examples: |
+    - everyone
+    - kids
+
+- regex:
+  examples: |
+    - .+
+

@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <h2>My wish listt</h2>
+
+  <!-- Prikaz prazne liste -->
+  @if (favorites().length === 0) {
+    <p>Wish list is empty.</p>
+  }
+
+  <!-- Tabela sa favorite -->
+  @if (favorites().length > 0) {
+    <table class="table">
+      
+      <!-- Zaglavlje tabele sa imenima kolona -->
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Product</th>
+          <th>Price</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (item of favorites(); track item.toyId) {
+          <tr>
+            <td class="align-middle">
+              <img
+                [src]="item.imageUrl"
+                [alt]="item.toyName"
+                style="width: 100px; height: auto;">
+            </td>
+
+            <td class="align-middle">{{ item.toyName }}</td>
+            <td class="align-middle">{{ item.price }} RSD</td>
+
+            <td class="align-middle">
+              <button
+                class="btn btn-success btn-sm me-2"
+                (click)="addToCart(item)">
+                <i class="fa-solid fa-cart-plus"></i> Add to cart
+              </button>
+
+              <button
+                class="btn btn-outline-danger btn-sm"
+                (click)="removeFromFavorites(item.toyId)">
+                <i class="fa-solid fa-xmark"></i> Remove
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+
+    </table>
+  }
+</div>
+
+@if (showSuccessDialog()) {
+  <div class="dialog-backdrop">
+    <div class="dialog-box">
+      <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+      <p class="mb-0">Successfully added to cart</p>
+    </div>
+  </div>
+}

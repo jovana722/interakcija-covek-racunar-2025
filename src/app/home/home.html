@@ -1,0 +1,188 @@
+<div class="filters mb-3 d-flex flex-wrap gap-2">
+
+  <!-- Tip -->
+  <select class="form-select w-auto" [value]="selectedType()" (change)="selectedType.set($any($event.target).value)">
+    <option value="">Category</option>
+    <option *ngFor="let type of toyTypes()" [value]="type">{{ type }}</option>
+  </select>
+
+  <!-- Uzrast -->
+  <select class="form-select w-auto" [value]="selectedAgeGroup()"
+    (change)="selectedAgeGroup.set($any($event.target).value)">
+    <option value="">Age</option>
+    <option *ngFor="let age of ageGroups()" [value]="age">{{ age }}</option>
+  </select>
+
+  <!-- Ciljna grupa -->
+  <select class="form-select w-auto" [value]="selectedTargetGroup()"
+    (change)="selectedTargetGroup.set($any($event.target).value)">
+    <option value="">All Kids</option>
+    <option *ngFor="let tg of targetGroups()" [value]="tg">{{ tg }}</option>
+  </select>
+
+  <!-- Cena -->
+  <select class="form-select w-auto" [value]="selectedPrice() || ''"
+    (change)="selectedPrice.set($any($event.target).value)">
+    <!-- placeholder opcija -->
+    <option value="">Price</option>
+
+    <!-- stvarne opcije -->
+    <option value="501-1000">501 - 1000 RSD</option>
+    <option value="1001-2000">1001 - 2000 RSD</option>
+    <option value="2001-3000">2001 - 3000 RSD</option>
+    <option value="3001-4000">3001 - 4000 RSD</option>
+    <option value="4001-5000">4001 - 5000 RSD</option>
+    <option value="5001-6000">5001 - 6000 RSD</option>
+  </select>
+
+
+  <!-- Godina proizvodnje -->
+  <select class="form-select w-auto" [value]="selectedProductionDate()"
+    (change)="selectedProductionDate.set($any($event.target).value)">
+    <option value="">Release Year</option>
+    <option *ngFor="let year of productionYears()" [value]="year">{{ year }}</option>
+  </select>
+
+
+  <select class="form-select w-auto" [value]="selectedRating() || ''" (change)="selectedRating.set(
+          $any($event.target).value
+            ? +$any($event.target).value
+            : null
+        )">
+    <option value="">Rating</option>
+    <option value="5">★★★★★ (5)</option>
+    <option value="4">★★★★☆ (4+)</option>
+    <option value="3">★★★☆☆ (3+)</option>
+    <option value="2">★★☆☆☆ (2+)</option>
+  </select>
+
+
+  <div class="flex-fill">
+    <input type="text" class="form-control w-100" placeholder="Search..." [value]="searchQuery()"
+      (input)="searchQuery.set($any($event.target).value)">
+  </div>
+
+  <!-- Pretraga po imenu/opisu -->
+
+</div>
+
+<div class="filter-chips mb-3">
+  <span *ngIf="selectedType()" class="badge bg-primary me-1">
+    Type: {{ selectedType() }}
+    <i class="fa-solid fa-x ms-1" (click)="selectedType.set('')"></i>
+  </span>
+
+  <span *ngIf="selectedAgeGroup()" class="badge bg-secondary me-1">
+    Age: {{ selectedAgeGroup() }}
+    <i class="fa-solid fa-x ms-1" (click)="selectedAgeGroup.set('')"></i>
+  </span>
+
+  <span *ngIf="selectedTargetGroup()" class="badge bg-success me-1">
+    Target: {{ selectedTargetGroup() }}
+    <i class="fa-solid fa-x ms-1" (click)="selectedTargetGroup.set('')"></i>
+  </span>
+
+  <span *ngIf="selectedPrice()" class="badge bg-warning text-dark me-1">
+    Price: {{ selectedPrice() }}
+    <i class="fa-solid fa-x ms-1" (click)="selectedPrice.set('')"></i>
+  </span>
+
+  <span *ngIf="selectedProductionDate()" class="badge bg-info text-dark me-1">
+    Year: {{ selectedProductionDate() }}
+    <i class="fa-solid fa-x ms-1" (click)="selectedProductionDate.set('')"></i>
+  </span>
+
+  <span *ngIf="searchQuery()" class="badge bg-dark me-1">
+    Search: {{ searchQuery() }}
+    <i class="fa-solid fa-x ms-1" (click)="searchQuery.set('')"></i>
+  </span>
+
+  <span *ngIf="selectedRating()" class="badge bg-warning text-dark me-1">
+    Rating: {{ selectedRating() }}+
+    <i class="fa-solid fa-x ms-1" (click)="selectedRating.set(null)">
+    </i>
+  </span>
+
+</div>
+
+
+
+<div class="toys row g-3">
+  @for (toy of filteredToys(); track toy.toyId) {
+  <div class="col-12 col-md-4">
+    <div class="card h-100">
+      @if (toy.imageUrl) {
+      <img [src]="toy.imageUrl" [alt]="toy.name" class="card-img-top">
+      }
+      <div class="card-body">
+        <h5 class="card-title">{{ toy.name }}</h5>
+        <div class="mb-2">
+          <span *ngFor="let s of [1,2,3,4,5]">
+            <i class="fa-star" [ngClass]="
+        getAvg(toy.toyId) >= s
+        ? 'fa-solid text-warning'
+        : 'fa-regular'
+       ">
+            </i>
+          </span>
+          <small class="text-muted">
+            ({{ getAvg(toy.toyId) || 0 }})
+          </small>
+        </div>
+        <h6 class="card-subtitle mb-2 text-muted">
+          {{ toy.type.name }} &nbsp;|&nbsp; {{ toy.ageGroup.name }}
+        </h6>
+        <p class="card-text">{{ toy.description }}</p>
+        <p class="card-text">Cena: {{ toy.price }} RSD</p>
+      </div>
+      <div class="card-footer btn-group">
+        <a class="btn btn-sm btn-primary" [routerLink]="['/toy', toy.toyId]">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
+        </a>
+        <a class="btn btn-sm btn-success" (click)="addToCart(toy)">
+          <i class="fa-solid fa-cart-plus"></i> Add to cart
+        </a>
+        <a class="btn btn-sm btn-pink" (click)="addToFavorites(toy)">
+          <i class="fa-solid fa-heart-circle-plus"></i> Add to favourites
+        </a>
+      </div>
+    </div>
+  </div>
+  }
+</div>
+
+
+@if (showLoginDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-lock fa-2x text-warning mb-2"></i>
+    <p class="mb-0">Please log in to continue</p>
+  </div>
+</div>
+}
+
+<!-- dijalog za uspešno dodato -->
+@if (showSuccessDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+    <p class="mb-0">Successfully added to cart</p>
+  </div>
+</div>
+}
+@if (showFavoriteExistsDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-circle-info fa-2x text-primary mb-2"></i>
+    <p class="mb-0">Already added to favorites list</p>
+  </div>
+</div>
+}
+@if (showFavoriteSuccessDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-heart fa-2x text-danger mb-2"></i>
+    <p class="mb-0">Added to favorites list</p>
+  </div>
+</div>
+}

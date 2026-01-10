@@ -1,0 +1,44 @@
+.movies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.card {
+    max-width: 25rem;
+}
+
+.input-group {
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+}
+
+.dialog-box {
+  background: #2F3F4A;
+  padding: 24px 32px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 280px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+}
+.btn-pink {
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+}
+
+.btn-pink:hover {
+  background-color: #ff85c1; /* svetlija nijansa pri hoveru */
+}

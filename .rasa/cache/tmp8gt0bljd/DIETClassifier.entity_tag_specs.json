@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-search_criteria",
+      "2": "I-search_criteria",
+      "3": "L-search_criteria",
+      "4": "U-search_criteria",
+      "5": "B-toy_name",
+      "6": "I-toy_name",
+      "7": "L-toy_name",
+      "8": "U-toy_name",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-search_criteria": 1,
+      "I-search_criteria": 2,
+      "L-search_criteria": 3,
+      "U-search_criteria": 4,
+      "B-toy_name": 5,
+      "I-toy_name": 6,
+      "L-toy_name": 7,
+      "U-toy_name": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]

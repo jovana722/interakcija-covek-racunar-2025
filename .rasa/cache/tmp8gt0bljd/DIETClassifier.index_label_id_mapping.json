@@ -1,0 +1,15 @@
+{
+  "0": "add_to_cart",
+  "1": "add_to_wishlist",
+  "2": "ask_age",
+  "3": "ask_category",
+  "4": "ask_price",
+  "5": "ask_production_year",
+  "6": "create_order",
+  "7": "goodbye",
+  "8": "greet",
+  "9": "latest_toys",
+  "10": "recommend_toys",
+  "11": "reserve_toy",
+  "12": "search_toys"
+}

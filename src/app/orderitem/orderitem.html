@@ -1,0 +1,23 @@
+<h2>Porudžbina</h2>
+
+@if (toy()) {
+<div>
+  <h3>{{ toy()!.name }}</h3>
+  <p>Cena: {{ toy()!.price }} RSD</p>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>
+      Količina:
+      <input type="number" formControlName="quantity" min="1">
+    </label>
+
+    <p>
+      Ukupno:
+      {{ toy()!.price * form.value.quantity }} RSD
+    </p>
+
+    <button type="submit">Poruči</button>
+  </form>
+</div>
+<a routerLink="/profile">Nazad na profil</a>
+}

@@ -1,0 +1,12 @@
+{
+  "0": "add_to_cart",
+  "1": "add_to_favorites",
+  "2": "cancel_order",
+  "3": "checkout",
+  "4": "greet",
+  "5": "pay_order",
+  "6": "recommend_toys",
+  "7": "reserve_cart_item",
+  "8": "reserve_order",
+  "9": "show_favorites"
+}

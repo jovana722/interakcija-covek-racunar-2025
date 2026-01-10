@@ -1,0 +1,19 @@
+{
+  "lookup": {
+    "eJyLrq6NBQAEOAGx": "action_listen",
+    "eJxNjEEKwzAMBL+iB4SSXP0VY4wJIghSOVibQDH+exWaQ2+7zDCxj4n60fjKZYVUDdR/I2t5c6Dn7GJgddf2CnMJpW2MvLV6HoHi8pqT09O4OWSFQNi9+O+liUQ9g0B3L6N+bIz0Bd+VMbU=": "action_list_toys",
+    "eJy1zjEKwzAMBdCr6AChtKuvYowxRQRBIgfrJ1BM7l6VdMiYJZvEf3wp9n2gvjTecnlDqgbqx5C1zBzov0xiYHVrU4U5QmkjI4+trkug+Ho8k6ercfOQFQJhd/Hs0kCiXoNAv76M+rH9+v3D3/FC+gL7LGMU": "action_listen",
+    "eJzFkMEKwkAMRH8lH1BEr/sryxIWDSW4ZssmFcrSfze1HnoUL94S5jEzTOzrAH1q9MR8Na4SoO8HSn5QgM9TWI3EWS3V1CHLbSTDsdV5ChAvp3NydVZqLpIYG5Nz8cilAVjcxgJsfmh10fX7/J3/a4XfJqjL2+mQnfW+ReONLHPxBukFq9+Ttg==": "action_toy_details",
+    "eJzFkNEKwjAMRX8lHzBEX/srpZSgYQRrO5pMGGX/buZ86OMQxLeEe3LvJb6tA7Sp0jPiVblkB20fYsYHOfgsiUUpGyupqBikWEfSONYyTw785XQOps5C1UTKyspknO+5MABns1EHm1/Ussh6PH/n/1rhuxeU5e3UZaPct+h4I0VORxv0F7+pEV4AC8Zq": "action_listen",
+    "eJzFkNEKwyAMRX/FDyhje/VXRERqKGFOi0kHRfz3pe0efCxj0LeEnNx7uaa2QdW5wNv5kTEnreoxuORfoNV3iUgMSViKmUkg9mUCdlPJy6yVedzuVq4LQZEjJEZGEM70nB0UJpFhrTY9x3mldt7/4C+N8FsFed2VOm9Pz83aBWCP8WyC/uPCGH8tIgRJ4EZfuDX7AUpL9UE=": "action_add_to_cart",
+    "eJzFkEEKwyAQRa/iAUJpt15FZJA4hKFWg04KQXL3TpouXEoJZKfMm/8fY+o2qDpnfIMbmVLUqh4PiO6FWv0+gQpjFLaExEUgdnlChimnZdbKPG53K9OlYJYhRiYmFM60nB0URYlhrfY84LSWrb//4C9V+O8Eaf0mNd2uPPdq8MiOQq9Bu3GhxqmH8F4MYHSZO9vbjfMV7AdigSYM": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taS2NhYA6dwbhQ==": "utter_greet",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpbhMiAUAQvc0lw==": "action_listen",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpeSZQMAVIPH4kvzK4traWADtF1A+": "action_list_toys",
+    "eJyLrq7VUaguKEoti09MLsnMz7NSqIYw4vMSc1OtFKCcnMziktQ8oNrS4tQioJrMPCC3xEohvSg1taSWgBmlJSWpRfEQpeSZQMAVIPH4kvzKYhLMgajHZ1QsAKssbUA=": "action_listen",
+    "eJytjlEKgCAQRK+yB+gEXiVikVpCKo11DUK8e4p9BlL0NzM8HtPH1EHcmQ7UoxhnFcQa0OqNFNxlNV7IZjZ44swYm6somJlIUsMRRIixot8MjRdlR3Gnf+Gp/C+qp0vaL0WDE4k2a7YNF4Fkizw=": "action_toy_details",
+    "eJytjkEKgCAQRa/iATqBV4kYhhpCKg0dgxDvnmKLFoEV7eYP7z9+G2IjwmppA+xZGS1FKAdoXEiKM8zKMenEekc2MUqnyFKMlohjxeGZyUJBvxkqK/If2Ozuhafwv6juJqGbsgYGYlTzU9u1UVd2B9SQq0o=": "action_listen",
+    "eJytkFEKgzAMhq/SA3iCXkVGCG0YRVdHmgpSvLuR7sGHjerwLX/48vGTvqydKW+mGdBJmKI1pQ4Q8UXWfMIYklBUNidiZULUKNY8mUjWhiOLEENF/zM0Wux7kGlJFzyVv0X1rRKmYdeAJ8EwnrUdL25S/izovdrAIev3HxtvC8d7": "action_add_to_cart",
+    "eJyt0M0JgDAMBeBVOoATdBWREGyQolZJoyDF3a3Ugwf/8daUl49H8jBnKvRMI2AptnNahfQAhy1ptQ2N9UIuZgdPHDPWxVG0qphI5htjECGGFP0m3LRY/0G6yb9wUv4X6qgS+nplwJCgbZ5q+42fyNOCxkQNSuSn199vXHPFAqdz5ZE=": "action_listen"
+  }
+}

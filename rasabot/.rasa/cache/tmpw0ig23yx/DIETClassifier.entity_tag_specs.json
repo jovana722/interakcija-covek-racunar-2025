@@ -1,0 +1,36 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-category_name",
+      "2": "I-category_name",
+      "3": "L-category_name",
+      "4": "U-category_name",
+      "5": "B-target_group",
+      "6": "I-target_group",
+      "7": "L-target_group",
+      "8": "U-target_group",
+      "9": "B-toy_name",
+      "10": "I-toy_name",
+      "11": "L-toy_name",
+      "12": "U-toy_name",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-category_name": 1,
+      "I-category_name": 2,
+      "L-category_name": 3,
+      "U-category_name": 4,
+      "B-target_group": 5,
+      "I-target_group": 6,
+      "L-target_group": 7,
+      "U-target_group": 8,
+      "B-toy_name": 9,
+      "I-toy_name": 10,
+      "L-toy_name": 11,
+      "U-toy_name": 12,
+      "O": 0
+    },
+    "num_tags": 13
+  }
+]

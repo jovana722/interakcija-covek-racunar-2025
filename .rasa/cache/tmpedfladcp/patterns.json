@@ -1,0 +1,6 @@
+[
+  {
+    "name": "target_group",
+    "pattern": "(\\bboys\\b|\\bgirls\\b|\\bkids\\b)"
+  }
+]

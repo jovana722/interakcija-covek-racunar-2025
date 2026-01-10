@@ -1,0 +1,91 @@
+<div class="container mt-4">
+    <h2>My cart</h2>
+
+    @if (!cartItems().length) {
+        <p>Cart is empty.</p>
+    } @else {
+        <!-- Clear all dugme -->
+        <button class="btn btn-outline-danger mb-3" (click)="clearCart()">
+            <i class="fa-solid fa-trash-can"></i> Clear all
+        </button>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                    <th>Book</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of cartItems(); track item.cartItemId) {
+                    <tr>
+                        <!-- Slika -->
+                        <td class="align-middle">
+                            <img [src]="item.imageUrl" [alt]="item.toyName"
+                                 style="width: 100px; height: auto; object-fit: contain;">
+                        </td>
+
+                        <!-- Naziv proizvoda -->
+                        <td class="align-middle">{{ item.toyName }}</td>
+
+                        <!-- Količina sa + i - dugmićima -->
+                        <td class="align-middle">
+                            <div class="d-flex align-items-center">
+                                <button class="btn btn-secondary btn-sm me-1" (click)="decrease(item.cartItemId)">−</button>
+                                <span class="mx-1">{{ item.quantity }}</span>
+                                <button class="btn btn-secondary btn-sm ms-1" (click)="increase(item.cartItemId)">+</button>
+                            </div>
+                        </td>
+
+                        <!-- Cena -->
+                        <td class="align-middle">{{ item.price }} RSD</td>
+
+                        <!-- Ukupno -->
+                        <td class="align-middle">{{ item.totalPrice }} RSD</td>
+
+                        <!-- Remove dugme -->
+                        <td class="align-middle">
+                            <button class="btn btn-outline-danger btn-sm" (click)="removeFromCart(item.cartItemId)">
+                                <i class="fa-solid fa-xmark"></i> Remove
+                            </button>
+                        </td>
+
+                        <!-- Book dugme -->
+                        <td class="align-middle">
+                            <button class="btn btn-outline-warning btn-sm" (click)="reserve(item.cartItemId)"
+                                [disabled]="item.status !== 'new'">
+                                <i class="fa-regular fa-bookmark"></i> Book
+                            </button>
+                        </td>
+
+                        <!-- Status -->
+                        <td class="align-middle">
+                            <span class="badge" 
+                                  [class.bg-secondary]="item.status === 'new'"
+                                  [class.bg-warning]="item.status === 'reserved'">
+                                {{ item.status }}
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <!-- Total -->
+        <h5>Total price: {{ total() }} RSD</h5>
+
+        <!-- Nastavi kupovinu i checkout -->
+        <button class="btn btn-secondary me-3 wide-btn" routerLink="/"> 
+            <i class="fa-solid fa-bag-shopping"></i> Continue shopping
+        </button>
+        <button class="btn btn-primary me-3 wide-btn" routerLink="/checkout">  
+            <i class="fa-solid fa-receipt"></i> Check out
+        </button>
+    }
+</div>

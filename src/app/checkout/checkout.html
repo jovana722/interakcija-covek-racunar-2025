@@ -1,0 +1,59 @@
+@if (!order()) {
+  <p>Nemate stavke za plaćanje.</p>
+} @else {
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of order()!.items; track item.orderItemId) {
+      <tr>
+        <!-- Slika -->
+        <td class="align-middle">
+          <img [src]="item.imageUrl" width="80" style="object-fit: contain;">
+        </td>
+
+        <!-- Naziv proizvoda -->
+        <td class="align-middle">{{ item.toyName }}</td>
+
+        <!-- Količina (ako želiš dugmiće + i - možeš ovde staviti Flexbox kao u korpi) -->
+        <td class="align-middle">
+          {{ item.quantity }}
+        </td>
+
+        <!-- Ukupna cena -->
+        <td class="align-middle">{{ item.totalPrice }} RSD</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+  <h5>Total price: {{ order()!.totalPrice }} RSD</h5>
+
+  <button class="btn btn-secondary me-3 wide-btn" (click)="cancel()">
+    <i class="fa-solid fa-ban"></i> Cancel
+  </button>
+  <button class="btn btn-primary me-3 wide-btn" (click)="pay()">
+    <i class="fa-solid fa-coins"></i> Pay Now
+  </button>
+  <button class="btn btn-warning me-3 wide-btn" (click)="reserveOrder()">
+    <i class="fa-regular fa-bookmark"></i> Book entire order
+  </button>
+
+}
+
+@if (showSuccessDialog()) {
+  <div class="dialog-backdrop">
+    <div class="dialog-box text-center">
+      <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+      <p class="mb-0 fw-semibold">You have paid successfully.</p>
+    </div>
+  </div>
+}

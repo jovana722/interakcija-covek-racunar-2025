@@ -1,0 +1,62 @@
+<div class="card login"> 
+  <div class="card-header">
+    <h5>Signup</h5>
+  </div>
+  <div class="card-body">
+    <!-- Dijalog za uspeh -->
+    @if (showSuccessDialog()) {
+      <div class="dialog-backdrop">
+        <div class="dialog-box">
+          <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+          <p class="mb-0">Successfully registered!</p>
+        </div>
+      </div>
+    }
+
+    <!-- Dijalog za grešku -->
+    @if (showErrorDialog()) {
+      <div class="dialog-backdrop">
+        <div class="dialog-box">
+          <i class="fa-solid fa-circle-xmark fa-2x text-danger mb-2"></i>
+          <p class="mb-0">{{ errorMessage() }}</p>
+        </div>
+      </div>
+    }
+
+    <form (ngSubmit)="signup()">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Name</label>
+        <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" name="firstName" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Last name</label>
+        <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" name="lastName" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Telephone</label>
+        <input type="text" class="form-control" id="phone" [(ngModel)]="phone" name="phone" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" [(ngModel)]="password" name="password" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Repeat password</label>
+        <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i> Submit
+      </button>
+    </form>
+  </div>
+</div>

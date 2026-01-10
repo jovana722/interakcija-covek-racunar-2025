@@ -1,0 +1,44 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: list_toys
+    - action: action_list_toys
+    - intent: ask_toy_details
+    - action: action_toy_details
+    - intent: add_to_cart
+    - action: action_add_to_cart
+
+- story: list toys and ask details by name
+  steps:
+    - intent: list_toys
+      entities:
+        - target_group: girl
+    - action: action_list_toys
+    - intent: ask_toy_details
+      entities:
+        - toy_name: "Plišana panda"
+    - action: action_toy_details
+    - intent: add_to_cart
+      entities:
+        - toy_name: "Plišana panda"
+    - action: action_add_to_cart
+    - intent: list_toys
+    - action: action_list_toys
+    - intent: ask_toy_details
+      entities:
+        - toy_name: "Drvena slagalica"
+    - action: action_toy_details
+    - intent: add_to_cart
+      entities:
+        - toy_name: "Drvena slagalica"
+    - action: action_add_to_cart
+    - intent: reserve_entire_order
+    - action: action_reserve_entire_order
+
+
+

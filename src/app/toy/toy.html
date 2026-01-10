@@ -1,0 +1,140 @@
+@if (toy()) {
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a routerLink="/">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+      {{ toy()?.name }}
+    </li>
+  </ol>
+</nav>
+
+<div class="row">
+  <div class="col-12 col-md-4">
+    @if (toy()?.imageUrl) {
+    <img [src]="toy()?.imageUrl" [alt]="toy()?.name" class="img-fluid">
+    }
+  </div>
+
+  <div class="col-12 col-md-8">
+    <div class="card">
+      <div class="card-header">
+        <h5>
+          <i class="fa-solid fa-horse" style="color: #e2ff80;"></i>
+          {{ toy()?.name }}
+        </h5>
+      </div>
+
+      <div class="card-body">
+        <p>{{toy()?.description}}</p>
+        <p>
+          Uzrast: {{ toy()?.ageGroup?.description }}
+        </p>
+        <p>
+          Kategorija: {{ toy()?.type?.name }} - {{toy()?.type?.description}}
+        </p>
+        <p>
+          Cena: <strong>{{ toy()?.price }} RSD</strong>
+        </p>
+
+        <p>
+
+        </p>
+
+      </div>
+
+      <div class="card-footer">
+
+        @if (toy()) {
+        <a class="btn btn-success" (click)="addToCart(toy()!)">
+          <i class="fa-solid fa-cart-plus"></i>
+          Add to cart
+        </a>
+        &nbsp;&nbsp;&nbsp;
+
+        <a class="btn btn-pink" (click)="addToFavorites(toy()!)">
+          <i class="fa-solid fa-heart-circle-plus"></i>
+          Add to favourites
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        }
+
+
+        <a class="btn btn-primary" routerLink="/">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to home
+        </a>
+      </div>
+
+    </div>
+<div class="mt-3">
+  <strong>Rate this toy:</strong>
+
+  <span *ngFor="let s of [1,2,3,4,5]"
+        (mouseenter)="hoveredStar.set(s)"
+        (mouseleave)="hoveredStar.set(0)"
+        (click)="rate(s)"
+        class="me-1"
+        style="cursor:pointer">
+
+    <i class="fa-star"
+       [ngClass]="
+        (hoveredStar() >= s || (userRating() ?? 0) >= s)
+        ? 'fa-solid text-warning'
+        : 'fa-regular'
+       ">
+    </i>
+  </span>
+</div>
+
+  </div>
+</div>
+
+
+
+}
+@if (showLoginDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-lock fa-2x text-warning mb-2"></i>
+    <p class="mb-0">Please log in to continue</p>
+  </div>
+</div>
+}
+
+<!-- dijalog za uspešno dodato -->
+@if (showSuccessDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+    <p class="mb-0">Successfully added to cart</p>
+  </div>
+</div>
+}
+
+@if (showFavoriteExistsDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-circle-info fa-2x text-primary mb-2"></i>
+    <p class="mb-0">Already added to favorites list</p>
+  </div>
+</div>
+}
+@if (showFavoriteSuccessDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-heart fa-2x text-danger mb-2"></i>
+    <p class="mb-0">Added to the favorites list</p>
+  </div>
+</div>
+}
+@if (showRatingSuccessDialog()) {
+<div class="dialog-backdrop">
+  <div class="dialog-box">
+    <i class="fa-solid fa-thumbs-up fa-2x mb-2" style="color: #FFD43B;"></i>
+    <p class="mb-0"> Thank you for rating our product!</p>
+  </div>
+</div>
+}

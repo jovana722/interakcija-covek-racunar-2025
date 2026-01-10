@@ -1,0 +1,11 @@
+{
+  "0": "add_to_cart",
+  "1": "ask_toy_details",
+  "2": "goodbye",
+  "3": "greet",
+  "4": "list_categories",
+  "5": "list_toys",
+  "6": "list_toys_by_category",
+  "7": "reserve_entire_order",
+  "8": "reserve_toy"
+}

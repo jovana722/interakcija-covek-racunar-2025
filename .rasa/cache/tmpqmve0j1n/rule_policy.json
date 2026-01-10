@@ -1,0 +1,30 @@
+{
+  "lookup": {
+    "rules": {
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_toy_details\"}}]": "action_toy_details",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"ask_toy_details\"}}, {\"prev_action\": {\"action_name\": \"action_toy_details\"}, \"user\": {\"intent\": \"ask_toy_details\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"reserve_entire_order\"}}]": "action_reserve_entire_order",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"reserve_entire_order\"}}, {\"prev_action\": {\"action_name\": \"action_reserve_entire_order\"}, \"user\": {\"intent\": \"reserve_entire_order\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_toys\"}}]": "action_list_toys",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_toys\"}}, {\"prev_action\": {\"action_name\": \"action_list_toys\"}, \"user\": {\"intent\": \"list_toys\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"add_to_cart\"}}]": "action_add_to_cart",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"add_to_cart\"}}, {\"prev_action\": {\"action_name\": \"action_add_to_cart\"}, \"user\": {\"intent\": \"add_to_cart\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_categories\"}}]": "action_list_categories",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_categories\"}}, {\"prev_action\": {\"action_name\": \"action_list_categories\"}, \"user\": {\"intent\": \"list_categories\"}}]": "action_listen",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_toys_by_category\"}}]": "action_list_toys_by_category",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_toys_by_category\"}}, {\"prev_action\": {\"action_name\": \"action_list_toys_by_category\"}, \"user\": {\"intent\": \"list_toys_by_category\"}}]": "action_listen"
+    },
+    "rule_only_slots": [],
+    "rule_only_loops": [],
+    "rules_for_loop_unhappy_path": {},
+    "rules_not_in_stories": [
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_toys_by_category\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_categories\"}}, {\"prev_action\": {\"action_name\": \"action_list_categories\"}, \"user\": {\"intent\": \"list_categories\"}}]",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_toys_by_category\"}}, {\"prev_action\": {\"action_name\": \"action_list_toys_by_category\"}, \"user\": {\"intent\": \"list_toys_by_category\"}}]",
+      "predicting default action with intent back",
+      "predicting default action with intent session_start",
+      "[{\"prev_action\": {\"action_name\": \"action_listen\"}, \"user\": {\"intent\": \"list_categories\"}}]",
+      "predicting default action with intent restart"
+    ]
+  }
+}

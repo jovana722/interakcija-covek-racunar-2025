@@ -1,0 +1,64 @@
+{
+  "type": "IntentMaxHistoryTrackerFeaturizer",
+  "state_featurizer": {
+    "action_texts": [],
+    "entity_tag_specs": [],
+    "feature_states": {
+      "intent": {
+        "add_to_cart": 0,
+        "add_to_favorites": 1,
+        "ask_toy_details": 2,
+        "back": 3,
+        "cancel_order": 4,
+        "checkout": 5,
+        "goodbye": 6,
+        "greet": 7,
+        "nlu_fallback": 8,
+        "out_of_scope": 9,
+        "pay_order": 10,
+        "recommend_toys": 11,
+        "reserve_cart_item": 12,
+        "reserve_order": 13,
+        "restart": 14,
+        "session_start": 15,
+        "show_favorites": 16
+      },
+      "action_name": {
+        "action_listen": 0,
+        "action_restart": 1,
+        "action_session_start": 2,
+        "action_default_fallback": 3,
+        "action_deactivate_loop": 4,
+        "action_revert_fallback_events": 5,
+        "action_default_ask_affirmation": 6,
+        "action_default_ask_rephrase": 7,
+        "action_two_stage_fallback": 8,
+        "action_unlikely_intent": 9,
+        "action_back": 10,
+        "...": 11,
+        "action_extract_slots": 12,
+        "action_hello": 13,
+        "action_recommend_toys": 14,
+        "action_toy_details": 15,
+        "action_add_to_favorites": 16,
+        "action_show_favorites": 17,
+        "action_add_to_cart": 18,
+        "action_reserve_cart_item": 19,
+        "action_checkout": 20,
+        "action_reserve_order": 21,
+        "action_pay_order": 22,
+        "action_cancel_order": 23,
+        "utter_goodbye": 24
+      },
+      "entities": {
+        "toy_name": 0
+      },
+      "slots": {
+        "toy_name_0": 0
+      },
+      "active_loop": {}
+    }
+  },
+  "remove_duplicates": true,
+  "max_history": 5
+}

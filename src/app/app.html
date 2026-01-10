@@ -1,3 +1,119 @@
-<p>{{title()}}</p>
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-3">
+    <div class="container">
+        <a class="navbar-brand" routerLink="/">
+            <i class="fa-solid fa-horse fa-xl" style="color: #e2ff80;"></i> Sweet Toys
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/" routerLinkActive="active">
+                        <i class="fa-solid fa-house"></i> Home
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/about" routerLinkActive="active">
+                        <i class="fa-solid fa-circle-info"></i> About
+                    </a>
+                </li>
+                @if (hasAuth()) {
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/cart" routerLinkActive="active">
+                        <i class="fa-solid fa-cart-shopping"></i> Cart
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/favorite" routerLinkActive="active">
+                        <i class="fa-solid fa-heart"></i> Favourites
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/profile" routerLinkActive="active">
+                        <i class="fa-solid fa-address-card"></i> Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="nav-link" (click)="doLogout()">
+                        <i class="fa-solid fa-door-open"></i> Logout
+                    </button>
+                </li>
+                } @else {
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/login" routerLinkActive="active">
+                        <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/signup" routerLinkActive="active">
+                        <i class="fa-solid fa-user-plus"></i> Signup
+                    </a>
+                </li>
+                }
+            </ul>
+            @if (hasAuth()) {
+            <div class="navbar-text">
+                <i class="fa-solid fa-user"></i> {{getUserName()}}
+            </div>
+            }
+        </div>
+    </div>
+</nav>
 
-<router-outlet />
+
+
+<div class="container">
+    <router-outlet />
+    <div class="chatbot-container position-fixed bottom-0 end-0 p-3">
+        @if(!isChatVisible) {
+        <button type="button" class="btn btn-primary rounded-circle p-3" (click)="toggleChat()">
+            <i class="fa-solid fa-comments"></i>
+        </button>
+        } @else {
+        <div class="chatbox card chatbox-content">
+            <div class="card-header d-flex justify-content-between">
+                <span class="fw-bold">Chat Bot</span>
+                <button class="btn-close" aria-label="Close" (click)="toggleChat()"></button>
+            </div>
+            <div class="card-body chat-body">
+                @for(msg of messages; track $index) {
+                <div class="message mb-2">
+                    @if(msg.type == 'user') {
+                    <div class="text-end">
+                        <div class="badge bg-primary text-white">{{msg.text}}</div>
+                    </div>
+                    }
+
+                    @if(msg.type == 'bot') {
+                    <div class="text-start">
+                        <div class="badge bg-secondary text-white msg-content text-start" [innerHTML]="msg.text"></div>
+                    </div>
+                    }
+
+                    @if(msg.type == 'error') {
+                    <div class="text-start">
+                        <div class="badge bg-danger text-white msg-content">{{msg.text}}</div>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="card-footer">
+                <input type="text" class="form-control" placeholder="Type a message..." [(ngModel)]="userMessage"
+                    (keyup.enter)="sendUserMessage()">
+            </div>
+        </div>
+        }
+    </div>
+
+
+
+
+<div class="container">
+    <router-outlet />
+    <div class="text-center mt-3">
+        <p>&copy; {{year}} Tehnički Fakultet - Interakcija Čovek Računar</p>
+    </div>
+</div>

@@ -1,0 +1,131 @@
+<div class="card mb-3">
+    <div class="card-header">
+        <h5>User Details</h5>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+            <div class="row">
+                <div class="col-12 col-md-6 mb-2">
+                    <input type="text" class="form-control" formControlName="firstName" placeholder="First Name">
+                </div>
+                <div class="col-12 col-md-6 mb-2">
+                    <input type="text" class="form-control" formControlName="lastName" placeholder="Last Name">
+                </div>
+                <div class="col-12 col-md-6 mb-2">
+                    <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                </div>
+                <div class="col-12 col-md-6 mb-2">
+                    <input type="text" class="form-control" formControlName="phone" placeholder="Phone">
+                </div>
+                <div class="col-12 mb-2"> <!-- koristi col-12 umesto col-md-6 -->
+                    <select class="form-select w-100" formControlName="favoriteCategory">
+                        <option value="">Choose your favorite toy category</option>
+                        <option *ngFor="let type of toyTypes()" [value]="type">{{ type }}</option>
+                    </select>
+
+                    <!-- Prikaz odabrane kategorije -->
+                    <div class="mt-2" *ngIf="profileForm.value.favoriteCategory">
+                        Favorite category: <strong>{{ profileForm.value.favoriteCategory }}</strong>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-2" [disabled]="profileForm.invalid">Update Profile</button>
+        </form>
+    </div>
+</div>
+
+<h4 class="mt-4">My Orders</h4>
+<div class="accordion">
+    @for (order of sortedOrders(); track order.orderId) {
+    <div class="accordion-item mb-2">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#o' + order.orderId">
+                <span class="badge me-2" [ngClass]="getStatusClass(order.status)">
+                    {{ statusMap[order.status] }}
+                </span>
+                {{ order.createdAt | date:'dd.MM.yyyy HH:mm' }} • {{ order.totalPrice }} RSD
+
+            </button>
+        </h2>
+        <div [id]="'o' + order.orderId" class="accordion-collapse collapse">
+    <div class="accordion-body">
+
+        <table class="table table-sm">
+            <!-- Zaglavlje tabele sa nazivima kolona -->
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (item of order.items; track item.toyId) {
+                <tr>
+                    <td>{{ item.toyName }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.totalPrice }} RSD</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="mt-2 d-flex gap-3">
+            <button class="btn btn-success btn-sm px-4" (click)="pay(order)"
+                [disabled]="order.status==='paid'">Pay</button>
+            <button class="btn btn-danger btn-sm px-4" (click)="cancel(order)"
+                [disabled]="order.status==='canceled'">Cancel</button>
+        </div>
+
+    </div>
+</div>
+
+    </div>
+    }
+</div>
+
+@if (showSuccessDialog()) {
+<div class="dialog-backdrop">
+    <div class="dialog-box">
+        <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+        <p class="mb-0">Account successfully updated!</p>
+    </div>
+</div>
+}
+@if (showPaidDialog()) {
+<div class="dialog-backdrop">
+    <div class="dialog-box">
+        <i class="fa-solid fa-circle-check fa-2x text-success mb-2"></i>
+        <p class="mb-0">Order successfully paid</p>
+    </div>
+</div>
+}
+
+@if (showCanceledDialog()) {
+<div class="dialog-backdrop">
+    <div class="dialog-box">
+        <i class="fa-solid fa-circle-xmark fa-2x text-danger mb-2"></i>
+        <p class="mb-0">Order successfully canceled</p>
+    </div>
+</div>
+}
+@if (showAlreadyPaidDialog()) {
+  <div class="dialog-backdrop">
+    <div class="dialog-box">
+      <i class="fa-solid fa-circle-info fa-2x text-warning mb-2"></i>
+      <p class="mb-0">Order is already paid</p>
+    </div>
+  </div>
+}
+
+@if (showAlreadyCanceledDialog()) {
+  <div class="dialog-backdrop">
+    <div class="dialog-box">
+      <i class="fa-solid fa-circle-info fa-2x text-warning mb-2"></i>
+      <p class="mb-0">Order is already canceled</p>
+    </div>
+  </div>
+}
+
