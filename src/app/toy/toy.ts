@@ -30,11 +30,11 @@ export class Toy {
 
 constructor(private route: ActivatedRoute) {
 
-  // 🔔 SLUŠAJ EVENT IZ CHAT-A
+  
   window.addEventListener('cart-add-success', (e: any) => {
     const toyId = e.detail;
 
-    // proveri da li je to ova igračka
+    
     if (this.toy()?.toyId === toyId) {
       this.showSuccessDialog.set(true);
 
