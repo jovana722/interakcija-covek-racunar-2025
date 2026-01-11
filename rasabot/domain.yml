@@ -21,6 +21,26 @@ slots:
       - type: from_entity
         entity: target_group
 
+  age:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: age
+
+  price:
+    type: float
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: price
+
+  release_year:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: release_year
   toy_name:
     type: text
     influence_conversation: false

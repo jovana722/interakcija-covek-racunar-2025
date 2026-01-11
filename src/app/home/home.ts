@@ -48,6 +48,32 @@ export class Home {
     private toyService: ToyService
   ) {
     this.loadToys();
+
+    window.addEventListener('bot-filter-target-group', (e: any) => {
+      const tg = e.detail;
+      this.selectedTargetGroup.set(tg === 'svi' ? null : tg);
+    });
+
+    // 🧩 kategorija (Slagalica)
+    window.addEventListener('bot-filter-category', (e: any) => {
+      const category = e.detail;
+      this.selectedType.set(category); // 👈 BITNO
+    });
+    // 🧒 AGE GROUP
+    window.addEventListener('bot-filter-age', (e: any) => {
+      this.selectedAgeGroup.set(e.detail ?? null);
+    });
+
+    // 💰 PRICE RANGE (npr "0-1000", "1000-2000")
+    window.addEventListener('bot-filter-price', (e: any) => {
+      this.selectedPrice.set(e.detail ?? null);
+    });
+
+    // 📅 PRODUCTION YEAR
+    window.addEventListener('bot-filter-year', (e: any) => {
+      this.selectedProductionDate.set(e.detail ?? null);
+    });
+
   }
 
   // učitavanje igračaka
@@ -74,39 +100,39 @@ export class Home {
     Array.from(new Set(this.toys().map(t => t.productionDate?.substring(0, 4))))
   );
 
-filteredToys = computed(() =>
-  this.toys().filter(toy => {
+  filteredToys = computed(() =>
+    this.toys().filter(toy => {
 
-    if (this.selectedType() && toy.type.name !== this.selectedType()) return false;
-    if (this.selectedAgeGroup() && toy.ageGroup.name !== this.selectedAgeGroup()) return false;
-    if (this.selectedTargetGroup() && toy.targetGroup !== this.selectedTargetGroup()) return false;
+      if (this.selectedType() && toy.type.name !== this.selectedType()) return false;
+      if (this.selectedAgeGroup() && toy.ageGroup.name !== this.selectedAgeGroup()) return false;
+      if (this.selectedTargetGroup() && toy.targetGroup !== this.selectedTargetGroup()) return false;
 
-    if (this.selectedPrice()) {
-      const [min, max] = this.selectedPrice()!.split('-').map(Number);
-      if (toy.price < min || toy.price > max) return false;
-    }
+      if (this.selectedPrice()) {
+        const [min, max] = this.selectedPrice()!.split('-').map(Number);
+        if (toy.price < min || toy.price > max) return false;
+      }
 
-    if (
-      this.selectedProductionDate() &&
-      !toy.productionDate.startsWith(this.selectedProductionDate()!)
-    ) return false;
+      if (
+        this.selectedProductionDate() &&
+        !toy.productionDate.startsWith(this.selectedProductionDate()!)
+      ) return false;
 
-    const q = this.searchQuery().toLowerCase();
-    if (
-      q &&
-      !toy.name.toLowerCase().includes(q) &&
-      !toy.description.toLowerCase().includes(q)
-    ) return false;
+      const q = this.searchQuery().toLowerCase();
+      if (
+        q &&
+        !toy.name.toLowerCase().includes(q) &&
+        !toy.description.toLowerCase().includes(q)
+      ) return false;
 
-    // ⭐ FILTER PO OCENI (SAFE)
-    if (this.selectedRating() !== null) {
-      const avg = this.ratingService.getAverageRating(toy.toyId) ?? 0;
-      if (avg < this.selectedRating()!) return false;
-    }
+      // ⭐ FILTER PO OCENI (SAFE)
+      if (this.selectedRating() !== null) {
+        const avg = this.ratingService.getAverageRating(toy.toyId) ?? 0;
+        if (avg < this.selectedRating()!) return false;
+      }
 
-    return true; // ✅ OBAVEZNO
-  })
-);
+      return true; // ✅ OBAVEZNO
+    })
+  );
 
 
   // metode

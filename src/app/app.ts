@@ -110,6 +110,48 @@ export class App {
             // ✅ ZAPAMTI IGRAČKE ZA ADD TO CART
             this.lastToys = attachment.data;
 
+            // 📢 OBAVESTI HOME STRANICU O FILTERU (boys / girls)
+            const filters = (attachment as any)?.filters;
+            if (filters?.targetGroup) {
+              window.dispatchEvent(
+                new CustomEvent('bot-filter-target-group', {
+                  detail: filters.targetGroup
+                })
+              );
+            }
+
+            if (filters?.category) {
+              window.dispatchEvent(
+                new CustomEvent('bot-filter-category', {
+                  detail: filters.category
+                })
+              );
+            }
+
+            if (filters?.ageGroup) {
+              window.dispatchEvent(
+                new CustomEvent('bot-filter-age', {
+                  detail: filters.ageGroup
+                })
+              );
+            }
+
+            if (filters?.priceRange) {
+              window.dispatchEvent(
+                new CustomEvent('bot-filter-price', {
+                  detail: filters.priceRange
+                })
+              );
+            }
+
+            if (filters?.year) {
+              window.dispatchEvent(
+                new CustomEvent('bot-filter-year', {
+                  detail: filters.year
+                })
+              );
+            }
+
 
             let html = '';
 

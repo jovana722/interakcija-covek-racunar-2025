@@ -26,6 +26,16 @@ def map_target_group(value: str) -> str:
     return mapping.get(value.lower(), "svi")
 
 
+def age_matches(age_group_name: str, requested_age: float) -> bool:
+    """
+    Checks if requested_age falls into age_group_name range (e.g., "3-5")
+    """
+    try:
+        min_age, max_age = age_group_name.split("-")
+        return int(min_age) <= requested_age <= int(max_age)
+    except Exception:
+        return False
+
 class ActionListToys(Action):
     def name(self) -> Text:
         return "action_list_toys"
@@ -34,14 +44,27 @@ class ActionListToys(Action):
         self,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
-        _
+        _,
     ) -> List[Dict[Text, Any]]:
 
-        # 1️⃣ Uzmi vrednost iz slota (NLU)
         raw_target = tracker.get_slot("target_group")
+        age = tracker.get_slot("age")
+        price = tracker.get_slot("price")
+        release_year = tracker.get_slot("release_year")
         api_target = map_target_group(raw_target)
 
-        # 2️⃣ Pozovi API
+        # convert age and price to numbers if they exist
+        if age:
+            try:
+                age = float(age)
+            except Exception:
+                age = None
+        if price:
+            try:
+                price = float(price)
+            except Exception:
+                price = None
+
         try:
             rsp = requests.get(f"{API_BASE}/toy")
             rsp.raise_for_status()
@@ -50,31 +73,54 @@ class ActionListToys(Action):
             dispatcher.utter_message("❌ I can't load toys right now.")
             return []
 
-        if api_target == "svi":
-            filtered = toys
-        else:
+        filtered = toys
+
+        # --- FILTERS ---
+        if api_target != "svi":
+            filtered = [t for t in filtered if t.get("targetGroup") in (api_target, "svi")]
+
+        if age:
             filtered = [
-                toy for toy in toys
-                if toy["targetGroup"] in (api_target, "svi")
+                t for t in filtered
+                if t.get("ageGroup") and age_matches(t["ageGroup"]["name"], age)
+            ]
+
+        if price:
+            filtered = [t for t in filtered if t.get("price") is not None and t["price"] <= price]
+
+        if release_year:
+            filtered = [
+                t for t in filtered
+                if t.get("productionDate") and int(t["productionDate"][:4]) == int(release_year)
             ]
 
         if not filtered:
-            dispatcher.utter_message("😕 No toys found.")
+            dispatcher.utter_message("😕 No toys found with those criteria.")
             return []
 
-
-        dispatcher.utter_message( 
+        # Send toy list with standardized filter keys for Angular frontend
+        dispatcher.utter_message(
             json_message={
-                "text": "🧸 Here are the toys:",
+                "text": "🧸 Here are the toys that match your search:",
                 "attachment": {
                     "type": "toy_list",
-                    "data": filtered
+                    "data": filtered,
+                    "filters": {
+                        "targetGroup": api_target,
+                        "ageGroup": str(age) if age else None,
+                        "priceRange": f"0-{int(price)}" if price else None,
+                        "year": str(release_year) if release_year else None
+                    }
                 }
             }
         )
 
-        return [SlotSet("last_toys", filtered)]
-
+        return [
+            SlotSet("last_toys", filtered),
+            SlotSet("age", None),
+            SlotSet("price", None),
+            SlotSet("release_year", None)
+        ]
 
 
 class ActionToyDetails(Action):
@@ -231,21 +277,24 @@ class ActionListToysByCategory(Action):
             dispatcher.utter_message("😕 No toys in that category.")
             return []
 
-        
         dispatcher.utter_message(
             json_message={
-                "text": f"🧸 Toys in {category} category:",
+                "text": f"🧩 Here are toys from {category}:",
                 "attachment": {
                     "type": "toy_list",
-                    "data": filtered
+                    "data": filtered,
+                    "filters": {
+                        "category": category   # 👈 OVO DODAJEŠ
+                    }
                 }
             }
         )
+
         return [
             SlotSet("last_toys", filtered),
             SlotSet("selected_category", category)
         ]
-    
+
 class ActionReserveEntireOrder(Action):
     def name(self):
         return "action_reserve_entire_order"

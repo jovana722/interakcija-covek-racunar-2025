@@ -13,7 +13,15 @@ nlu:
 
 - intent: list_toys
   examples: |
-
+    - show toys for age [3](age)
+    - toys for [5](age) years old
+    - toys under [2000](price)
+    - toys cheaper than [1500](price)
+    - toys from year [2023](release_year)
+    - toys released in [2024](release_year)
+    - toys for girls age [4](age)
+    - toys for boys under [3000](price)
+    - toys for kids age [6](age) from [2022](release_year)
 
     - show toys for [girls](target_group)
     - show toys for [boys](target_group)
